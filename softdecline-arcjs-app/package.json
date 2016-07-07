@@ -1,0 +1,22 @@
+{
+  "name": "mozu-softdeclinesample",
+  "version": "0.1.0",
+  "description": "",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-mozu-appdev-sync": "^1.0.0",
+    "load-grunt-tasks": "^3.3.0",
+    "mocha": "^2.3.3",
+    "mozu-action-helpers": "^0.3.4",
+    "mozu-action-simulator": "^1.5.0",
+    "time-grunt": "^1.2.1"
+  },
+  "dependencies": {
+    "mozu-node-sdk": "^1.17.15154",
+    "underscore": "^1.8.3"
+  }
+}
