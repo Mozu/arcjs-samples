@@ -1,0 +1,14 @@
+{
+  "exports": [
+    {
+      "id": "http.commerce.catalog.storefront.products.getProductForIndexing.after",
+      "virtualPath": "./dist\\commerce.catalog.storefront.products.manifest.all.js",
+      "actionId": "http.commerce.catalog.storefront.products.getProductForIndexing.after"
+    },
+    {
+      "id": "embedded.platform.applications.install",
+      "virtualPath": "./dist\\platform.applications.manifest.all.js",
+      "actionId": "embedded.platform.applications.install"
+    }
+  ]
+}

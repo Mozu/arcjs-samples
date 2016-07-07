@@ -1,0 +1,18 @@
+{
+  "generator-mozu-actions": {
+    "createGit": true,
+    "testFramework": "mocha",
+    "domains": [
+      "commerce.carts",
+      "commerce.orders",
+      "platform.applications"
+    ],
+    "actionNames": [
+      "embedded.commerce.carts.addItem.before",
+      "embedded.commerce.carts.updateItem.before",
+      "embedded.commerce.orders.addItem.before",
+      "embedded.commerce.orders.createFromCart.before",
+      "embedded.platform.applications.install"
+    ]
+  }
+}
