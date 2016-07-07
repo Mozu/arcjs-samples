@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://home.mozu.com",
+  "developerAccountId": 53,
+  "developerAccount": {
+    "emailAddress": "bob_hewett@volusion.com"
+  },
+  "workingApplicationKey": "c367d49.price_indexer.1.0.0.Release"
+}

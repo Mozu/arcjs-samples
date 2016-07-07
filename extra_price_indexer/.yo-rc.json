@@ -1,0 +1,14 @@
+{
+  "generator-mozu-actions": {
+    "createGit": true,
+    "testFramework": "mocha",
+    "domains": [
+      "commerce.catalog.storefront.products",
+      "platform.applications"
+    ],
+    "actionNames": [
+      "http.commerce.catalog.storefront.products.getProductForIndexing.after",
+      "embedded.platform.applications.install"
+    ]
+  }
+}
