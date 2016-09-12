@@ -1,0 +1,21 @@
+{
+  "name": "tax_calc",
+  "version": "0.1.0",
+  "description": "Special Tax Calculator",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-mozu-appdev-sync": "^2.4.1",
+    "load-grunt-tasks": "^3.5.2",
+    "mocha": "^3.0.2",
+    "mozu-action-helpers": "^0.5.6",
+    "mozu-action-simulator": "^1.6.3",
+    "time-grunt": "^1.4.0"
+  }
+}
