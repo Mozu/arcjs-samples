@@ -35,21 +35,27 @@ module.exports = function(context, callback) {
   }
 
   // make sure to get current tax so we can add to the total.
-  var orderDutyAmount = order.taxTotal + 0.0;
+  var orderDutyAmount = 0.0;
   // for each
   if (order.items && order.items.length > 0) {
     for (var i = 0; i < order.items.length; i++) {
       var properties = order.items[i].product.properties;
+      var mnTax = 0.00;
       for (var j = 0; j < properties.length; j++) {
         console.info("property FQN: " + properties[j].attributeFQN);
-        console.info("property value: " + properties[j].values[0].stringValue);
 
         // Calculate Minnesota amusement tax baded on the discounted price.
         if (properties[j].attributeFQN == 'tenant~tax-code' && properties[j].values[0].value == "MN-Amusement-Tax") {
             itemDutyAmount = order.items[i].discountedTotal * 0.10275;
             console.info("Adding a dutyAmount of: " + itemDutyAmount);
-            orderDutyAmount += itemDutyAmount;
+            mnTax += itemDutyAmount;
         }
+      }
+
+      if (mnTax <= 0.00 && order.items[i].itemTaxTotal > 0.00) {
+        orderDutyAmount += order.items[i].itemTaxTotal;
+      } else {
+        orderDutyAmount += mnTax;
       }
     }
     context.exec.setDutyAmount(orderDutyAmount);
