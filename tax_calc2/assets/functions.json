@@ -1,0 +1,19 @@
+{
+  "exports": [
+    {
+      "id": "http.commerce.catalog.storefront.tax.estimateTaxes.before",
+      "virtualPath": "./dist\\commerce.catalog.storefront.tax.manifest.all.js",
+      "actionId": "http.commerce.catalog.storefront.tax.estimateTaxes.before"
+    },
+    {
+      "id": "http.commerce.catalog.storefront.tax.estimateTaxes.after",
+      "virtualPath": "./dist\\commerce.catalog.storefront.tax.manifest.all.js",
+      "actionId": "http.commerce.catalog.storefront.tax.estimateTaxes.after"
+    },
+    {
+      "id": "embedded.platform.applications.install",
+      "virtualPath": "./dist\\platform.applications.manifest.all.js",
+      "actionId": "embedded.platform.applications.install"
+    }
+  ]
+}
