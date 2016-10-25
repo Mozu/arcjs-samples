@@ -24,6 +24,27 @@ module.exports = function(context, callback) {
 	console.info("response: %j", context.response);
 	console.info("Order #: " + taxOrderInfo.OrderNumber);
 
+	// if the destination is not MN, calculate using the default tax engine.
+	if (taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince === 'MN') {
+		var responsBody = calculateMnTax(taxOrderInfo, function (responseBody){
+			console.info("%j", responseBody);
+			context.response.body = responseBody;
+			// call end to return this reponse and to skip calling the built in mozu
+			// route which would over write this.
+			context.response.end();
+			console.info("Special MN Taxing for this state! Tax State: " +
+					taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince);
+
+			callback();
+		});
+	} else {
+		console.info("Using default Taxing for this state! Tax State: " + 
+				taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince);
+		callback();
+	}
+};
+
+function calculateMnTax(taxOrderInfo, callback) {
 	var responseBody = {
 		"itemTaxContexts" : [],
 		"shippingTax" : 0.00,
@@ -41,15 +62,13 @@ module.exports = function(context, callback) {
 			console.info("LineItemPrice: " + lineItem.LineItemPrice);
 			// Only apply special tax to people in Minnesota!! Skip Tax
 			// exempt
-			if (taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince == 'MN' && 
-					!taxOrderInfo.TaxContext.TaxExemptId &&  
-					lineItem.IsTaxable) {
+			if (!taxOrderInfo.TaxContext.TaxExemptId && lineItem.IsTaxable) {
 
 				itemTaxAmount = lineItem.LineItemPrice * 0.10275;
 				console.info("Adding a item tax Amount of: " + itemTaxAmount);
 			} else {
-				console.info("No tax for this state (or tax exempt customer). Tax State: " + 
-						taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince);
+				console.info("Tax exempt customer (or item).  TaxID: " +
+						taxOrderInfo.TaxContext.TaxExemptId);
 			}
 			responseBody.itemTaxContexts.push({
 				"id" : lineItem.Id,
@@ -60,12 +79,9 @@ module.exports = function(context, callback) {
 			});
 			orderTotalTax += itemTaxAmount;
 		}
-		responseBody.orderTax = orderTotalTax.toFixed (2);
+		responseBody.orderTax = orderTotalTax.toFixed(2);
 
 		console.info("End: storefront.tax.estimateTaxes.before. Total Tax = " + orderTotalTax);
-	} 
-	console.info ("%j", responseBody);
-	context.response.body = responseBody;
-    //call end to return this reponse and to skip calling the built in mozu route which would over write this.
-    context.response.end();
-};
+	}
+	callback(responseBody);
+}
