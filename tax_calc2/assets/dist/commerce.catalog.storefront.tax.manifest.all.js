@@ -69,7 +69,7 @@ module.exports = function(context, callback) {
 
 	// if the destination is not MN, calculate using the default tax engine.
 	if (taxOrderInfo.TaxContext.DestinationAddress.StateOrProvince === 'MN') {
-		var responsBody = calculateMnTax(taxOrderInfo, function (responseBody){
+		calculateMnTax(taxOrderInfo, function (responseBody){
 			console.info("%j", responseBody);
 			context.response.body = responseBody;
 			// call end to return this reponse and to skip calling the built in mozu
